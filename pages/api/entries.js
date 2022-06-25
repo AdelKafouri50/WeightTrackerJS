@@ -1,5 +1,5 @@
 import dbConnect from "../../utils/dbConnect";
-import Entry from "../../models/Entry";
+import Entry from "../../Models/Entry";
 
 dbConnect();
 
