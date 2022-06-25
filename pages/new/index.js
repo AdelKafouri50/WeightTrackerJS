@@ -1,9 +1,8 @@
-import { useRef } from "react/cjs/react.development";
 function index() {
-  const weightRef = useRef();
-  const macrosRef = useRef();
-  const foodsRef = useRef();
-  const dateRef = useRef();
+  const weightRef = React.useRef();
+  const macrosRef = React.useRef();
+  const foodsRef = React.useRef();
+  const dateRef = React.useRef();
 
   const handleSubmit = async (e) => {
     const weight = weightRef.current.value;
