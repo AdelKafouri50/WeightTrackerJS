@@ -50,19 +50,21 @@ export default function Home({ entries }) {
   }
 
   return (
-    <div className="container mx-auto my-auto h-screen flex items-center flex-col ">
-      <Head>
-        <title>Weight Tracker</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <div className='bg-black'>
+      <div className="container mx-auto my-auto h-screen flex items-center flex-col">
+        <Head>
+          <title>Weight Tracker</title>
+          <link rel="icon" href="/favicon.ico" />
+        </Head>
 
-      <div className='h-1/2 w-3/4  mx-auto my-auto flex flex-col items-center'>
-        <Line options={options} data={data} />
-      <div className='border mt-6 p-4 bg-rose-500 text-white rounded-md cursor-pointer hover:bg-red-500 transition-colors' onClick={()=>{
-        window.location.href = '/new'
-      }}>
-        Add Weight Entry
-      </div>
+        <div className='h-1/2 w-3/4  mx-auto my-auto flex flex-col items-center'>
+          <Line options={options} data={data} />
+        <div className=' mt-6 p-4 bg-rose-500 text-white rounded-md cursor-pointer hover:bg-red-500 transition-colors' onClick={()=>{
+          window.location.href = '/new'
+        }}>
+          Add Weight Entry
+        </div>
+        </div>
       </div>
     </div>
   )
