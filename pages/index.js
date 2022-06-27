@@ -98,13 +98,13 @@ export default function Home({ }) {
   }
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <p className='text-white'>Loading...</p>;
   }
 
   if (error){
     return(
       <div>
-        <p>Please login</p>
+        <p className='text-white'>Please login</p>
       </div>
     )
     

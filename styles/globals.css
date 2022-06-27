@@ -2,7 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-
+html{
+  background-color: black;
+}
 @font-face {
   font-family: 'Anek Latin';
   font-style: normal;
