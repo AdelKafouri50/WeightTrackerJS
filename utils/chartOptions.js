@@ -7,7 +7,7 @@ export const options = {
       },
       title: {
         display: true,
-        text: 'Weight over time',
+        text: 'Weight Over Time',
       },
     },
   };

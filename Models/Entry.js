@@ -14,12 +14,16 @@ const entrySchema = mongoose.Schema({
     dateCreated: {
         type: Date,
         default: Date.now,
+        unique: true
     },
     weekDay: {
         type: String,
         required: true
+    },
+    createdBy: {
+        type: String,
+        required: true
     }
-
 })
 
 entrySchema.virtual('id').get(function() {
