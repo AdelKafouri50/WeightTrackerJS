@@ -94,7 +94,7 @@ export default function New({}) {
           <label htmlFor="">
             <h1 className="text-xl text-left mb-2">Foods: </h1>
             <input
-              type="number"
+              type="text"
               className="border border-rose-500 text-rose-500 placeholder:text-rose-400 bg-black outline-black rounded-md mb-2 p-2 w-full"
               placeholder="Foods"
               name="foods"

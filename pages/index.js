@@ -131,7 +131,12 @@ export default function Home({ }) {
                     <PeriodButton period={item} setPeriod={setPeriod} />
                 ))}
           </div>
-          <Line options={options} data={data} />
+          {entries.length > 0 ? 
+          <Line options={options} data={data} />:
+          <div className='text-rose-500 p-10 h-1/2'>
+            Loading...
+          </div>
+          }
         <div className=' mt-6 p-4 bg-rose-500 text-black rounded-md cursor-pointer hover:bg-red-500 transition-colors' onClick={()=>{
           window.location.href = '/new'
         }}>
