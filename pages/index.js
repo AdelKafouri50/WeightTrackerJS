@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Line } from 'react-chartjs-2'
-import { options } from '../utils/chartOptions'
+import options from '../utils/chartOptions'
 import React from 'react'
 import { useUser } from '@auth0/nextjs-auth0';
 import Header from '../components/header';
@@ -38,8 +38,10 @@ export default function Home({ }) {
   const [entries, setEntries] = React.useState([])
   const [period, setPeriod] = React.useState('1 Week')
   const [periodArray, setPeriodArray] = React.useState(['1 Week', '2 Weeks', '1 Month', '1 Year', 'All Time'])
+  const [optionZ, setOptionZ] = React.useState({})
 
   React.useEffect(() => {
+    setOptionZ(options(period))
     async function fetchData() { 
       if (user){
         const res = await fetch(`/api/entries?user=${user.email}`)
@@ -131,12 +133,12 @@ export default function Home({ }) {
                     <PeriodButton period={item} setPeriod={setPeriod} />
                 ))}
           </div>
-          {entries.length > 0 ? 
-          <Line options={options} data={data} />:
-          <div className='text-rose-500 p-10 h-1/2'>
-            Loading...
-          </div>
-          }
+            {entries.length > 0 ? 
+            <Line options={optionZ} data={data} />:
+            <div className='text-rose-500 p-10 h-1/2'>
+              Loading...
+            </div>
+            }    
         <div className=' mt-6 p-4 bg-rose-500 text-black rounded-md cursor-pointer hover:bg-red-500 transition-colors' onClick={()=>{
           window.location.href = '/new'
         }}>

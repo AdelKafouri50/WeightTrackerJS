@@ -1,14 +1,21 @@
 
-export const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
+
+  export default function options (period){
+    return {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: `Weight Over ${period}`,
+        },
       },
-      title: {
-        display: true,
-        text: 'Weight Over Time',
-      },
-    },
-  };
+    }
+  }
+
+
+
+  
   
