@@ -36,12 +36,12 @@ ChartJS.register(
 export default function Home({ }) {
   const { user, error, isLoading } = useUser();
   const [entries, setEntries] = React.useState([])
-  const [period, setPeriod] = React.useState('1 Week')
+  const [replica, setReplica] = React.useState([])
+  const [period, setPeriod] = React.useState('2 Weeks')
   const [periodArray, setPeriodArray] = React.useState(['1 Week', '2 Weeks', '1 Month', '1 Year', 'All Time'])
   const [optionZ, setOptionZ] = React.useState({})
 
   React.useEffect(() => {
-    setOptionZ(options(period))
     async function fetchData() { 
       if (user){
         const res = await fetch(`/api/entries?user=${user.email}`)
@@ -49,47 +49,51 @@ export default function Home({ }) {
         let sortedDates = data.sort((a, b) => {
           return new Date(a.dateCreated) - new Date(b.dateCreated);
         })
-          switch (period) {
-            case '1 Week':
-              console.log(sortedDates)
-              let week = sortedDates.slice(-7)
-              setEntries(week)
-              break;
-            case '2 Weeks':
-              let twoWeeks = sortedDates.slice(-14)
-              setEntries(twoWeeks)
-              break;
-            case '1 Month':
-              let month = sortedDates
-              month = month.slice(-30)
-              setEntries(month)
-              break;
-            case '1 Year':
-              let year = sortedDates
-              year = year.slice(-365)
-              setEntries(year)
-              break;
-            case 'All Time':
-              setEntries(sortedDates)
-              break;
-            default:
-              break;
-          }
+        setEntries(sortedDates)
+        setReplica(sortedDates.slice(-14))
       }
       }
     fetchData()
-  }, [period, user])
+  }, [user])
+
+  React.useEffect(() => {
+    setOptionZ(options(period))
+    switch (period) {
+      case '1 Week':
+        console.log(entries)
+        setReplica(entries.slice(-7))
+        break;
+      case '2 Weeks':
+        setReplica(entries.slice(-14))
+
+        break;
+      case '1 Month':
+        setReplica(entries.slice(-30))
+
+        break;
+      case '1 Year':
+        setReplica(entries.slice(-365))
+
+        break;
+      case 'All Time':
+        setReplica(entries)
+
+        break;
+      default:
+        break;
+    }
+  }, [period])
   
 
 
 
   const data = {
-    labels: entries.map(entry => `${entry.weekDay} ${entry.dateCreated.split('T').splice(0,1).join('').split('-').reverse().join('-')}`),
+    labels: replica.map(entry => `${entry.weekDay} ${entry.dateCreated.split('T').splice(0,1).join('').split('-').reverse().join('-')}`),
     datasets: [
       {
         fill: true,
         label: 'Weight',
-        data: entries.map(entry => entry.weight),
+        data: replica.map(entry => entry.weight),
         backgroundColor: 'rgba(255,99,132,0.2)',
         borderColor: 'rgba(255,99,132,1)',
         borderWidth: 1,
