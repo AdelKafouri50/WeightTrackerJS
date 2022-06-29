@@ -1,7 +1,7 @@
 
 export default function Header({user, isLoading}){
     return (
-        <div className='flex justify-between mt-4 w-full'>
+        <div className='flex justify-between mt-4 w-full items-center '>
             <div className='text-rose-500 p-4 cursor-default'>
             Logged in as: {user.email}
             </div>
