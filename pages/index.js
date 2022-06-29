@@ -130,7 +130,7 @@ export default function Home({ }) {
         <div className='h-1/2 w-3/4  mx-auto my-auto flex flex-col items-center'>
           <div className=' mt-[-2em] mb-4 w-1/2 flex justify-between'>
             {periodArray.map(item => (
-                    <PeriodButton period={item} setPeriod={setPeriod} />
+                    <PeriodButton key={item} period={item} setPeriod={setPeriod} />
                 ))}
           </div>
             {entries.length > 0 ? 
