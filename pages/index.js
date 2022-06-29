@@ -41,10 +41,12 @@ export default function Home({ }) {
   const [periodArray, setPeriodArray] = React.useState(['1 Week', '2 Weeks', '1 Month', '1 Year', 'All Time'])
   const [optionZ, setOptionZ] = React.useState({})
   const [change, setChange] = React.useState(false)
+  const [loading, setLoading] = React.useState(true)
 
 
   React.useEffect(() => {
     async function fetchData() { 
+      setLoading(true)
       if (user){
         const res = await fetch(`/api/entries?user=${user.email}`)
         const data = await res.json()
@@ -54,6 +56,7 @@ export default function Home({ }) {
         setEntries(sortedDates)
         setReplica(sortedDates.slice(-14))
       }
+      setLoading(false)
       }
     fetchData()
   }, [user])
@@ -136,15 +139,22 @@ export default function Home({ }) {
         <div className='h-1/2 w-3/4  mx-auto my-auto flex flex-col items-center'>
           <div className=' mt-[-2em] mb-4 w-1/2 flex justify-between'>
             {periodArray.map(item => (
-                    <PeriodButton key={item} period={item} setPeriod={setPeriod} change={change} setChange={setChange}/>
+                    <PeriodButton loading={loading} replica={replica} key={item} period={item} setPeriod={setPeriod} change={change} setChange={setChange}/>
                 ))}
           </div>
-            {entries.length > 0 ? 
-            <Line options={optionZ} data={data} />:
-            <div className='text-rose-500 p-10 h-1/2'>
-              Loading...
-            </div>
-            }    
+            {!loading && entries.length > 0 &&
+              <Line options={optionZ} data={data} />
+            }
+            {loading &&
+              <div className='text-rose-500 p-10 h-1/2'>
+                Loading...
+              </div>}
+
+            {!loading && entries.length == 0 &&
+              <div className='text-rose-500 p-10 h-1/2'>
+                No data found. Please add an entry
+              </div>}
+  
         <div className=' mt-6 p-4 bg-rose-500 text-black rounded-md cursor-pointer hover:bg-red-500 transition-colors' onClick={()=>{
           window.location.href = '/new'
         }}>
